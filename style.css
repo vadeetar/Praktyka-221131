@@ -1,0 +1,115 @@
+body {
+  font-family: 'Tenor Sans', sans-serif;
+  scroll-behavior: smooth;
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.header.scrolled .logo {
+  font-size: 1rem;
+}
+.slider img {
+  max-height: 300px;
+  width: 100%;
+  object-fit: cover;
+}
+.title-with-line {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 15px;
+  margin-bottom: 15px; /* Добавлено для отступа между чертой и текстом */
+}
+
+.title-with-line::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background: #333;
+  /* Добавлено для лучшей видимости: */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.section-title {
+  margin: 0;
+  padding: 0;
+  font-size: 2rem; /* Добавлен размер шрифта */
+  color: #333; /* Добавлен цвет текста */
+  text-transform: uppercase; /* Опционально: все заглавные буквы */
+}
+
+.lead-text {
+  font-weight: bold;
+  margin-top: 0; /* Изменено с 15px */
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.about-img {
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important; /* Явная тень */
+  transition: all 0.3s ease;
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  transform: translateZ(0); /* Фикс для некоторых браузеров */
+}
+.about-img:hover {
+  transform: scale(1.02) translateZ(0);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4) !important;
+}
+
+.chef-img:hover {
+  transform: scale(1.03);
+}
+
+/* Улучшенные стили для фоновой секции */
+.master-chef-section {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Эффект параллакса */
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  color: #fff;
+}
+
+.master-chef-content {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+}
+.dish-img {
+  transition: transform 0.3s ease;
+  object-fit: cover;
+}
+
+.dish-img:hover {
+  transform: scale(1.02);
+}
+
+.special-content {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+}
+
+.btn-outline-warning {
+  border-color: #FFD700;
+  color: #FFD700;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-warning:hover {
+  background-color: #FFD700;
+  color: #000;
+}

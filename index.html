@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hunger Restaurant</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <style>
+    body {
+      font-family: 'Tenor Sans', sans-serif;
+      scroll-behavior: smooth;
+      padding-top: 56px;
+    }
+    
+    .header {
+      transition: all 0.3s ease;
+    }
+    .header.scrolled {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .header.scrolled .logo {
+      font-size: 1.2rem;
+    }
+    
+    .hero-banner {
+      background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 180px 20px;
+      position: relative;
+    }
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-banner h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .hero-banner h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+    }
+    .hero-banner h2::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 2px;
+      background: white;
+    }
+    
+    .slider img {
+      max-height: 300px;
+      width: 100%;
+      object-fit: cover;
+    }
+    
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1050;
+    }
+    .modal-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 400px;
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      z-index: 1051;
+    }
+    .btn-close {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: 1.5rem;
+    }
+    
+    /* Добавленные стили для новых разделов */
+    .about-img, .chef-img {
+      max-height: 500px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .section-title {
+      position: relative;
+      padding-bottom: 15px;
+      margin-bottom: 30px;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 2px;
+      background: #333;
+    }
+    .lead-text {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      font-weight: bold;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-banner {
+        padding: 100px 20px;
+      }
+      .hero-banner h1 {
+        font-size: 2.5rem;
+      }
+      .hero-banner h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header fixed-top bg-white shadow-sm">
+  <div class="container d-flex justify-content-between align-items-center py-2">
+    <h1 class="logo m-0">Hunger</h1>
+    <nav>
+      <a href="#about" class="mx-2">About</a>
+      <a href="#menu" class="mx-2">Menu</a>
+      <a href="#team" class="mx-2">Team</a>
+      <a href="#contact" class="mx-2">Contact</a>
+      <a href="javascript:void(0)" onclick="showAuthModal()" class="mx-2 text-primary">Login/Register</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-banner">
+  <div class="hero-content">
+    <h1>HUNGRY PEOPLE</h1>
+    <h2>ABOUT US</h2>
+    <a href="#about" class="btn btn-outline-light btn-lg mt-4">Learn More</a>
+  </div>
+</section>
+
+<main class="pt-5">
+  <section id="about" class="py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 mx-auto text-center">
+          <div class="title-with-line">
+            <h2 class="section-title">ABOUT US</h2>
+          </div>
+          <p class="lead-text">We opened in 1995.</p>
+        </div>
+        <div class="col-md-6 text-center">
+          <img src="img/18af64e41d592dc138911fee451cd3a68dddd007.jpg" 
+               alt="About Us" 
+               class="about-img img-fluid">
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="py-5 master-chef-section" style="background-image: url('img/ee7dd096bd2cc411643a2822521d6e716aa42a6c.jpg');
+background-position: center bottom;">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 order-md-2 master-chef-content">
+        <h2 class="section-title" style="color: #FFD700;">MASTER CHEF</h2>
+        <p class="lead-text" style="color: #FFD700;">COOOOOOOOOOOOOOOOOOL.</p>
+         </div>
+      <div class="col-md-6 order-md-1 text-center">
+        <img src="img/f5f66f2ab6571fd738c84d457ca9c8a77c3e2cb7.jpg" 
+             alt="Master Chef" 
+             class="chef-img img-fluid" 
+             style="max-width: 300px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="book" class="py-5" style="background-color: #f8f9fa;">
+  <div class="container">
+    <h2 class="text-center mb-5" style="font-size: 2.5rem; letter-spacing: 2px; color: #333;">BOOK A TABLE</h2>
+    
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="d-flex flex-column flex-md-row">
+          <!-- Форма бронирования (смещена левее) -->
+          <div class="booking-form p-4 mr-md-4" style="background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); flex: 2; margin-right: 2rem;">
+            <form id="bookingForm" method="post" action="php/process_booking.php">
+              <div class="row">
+                <!-- Первый столбец -->
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <input type="text" class="form-control" name="name" placeholder="Name" required 
+                           style="border: 1px solid #ddd; border-radius: 4px; padding: 12px;">
+                  </div>
+                  
+                  <div class="form-group mb-3">
+                    <input type="email" class="form-control" name="email" placeholder="Email" required 
+                           style="border: 1px solid #ddd; border-radius: 4px; padding: 12px;">
+                  </div>
+                  
+                  <div class="form-group mb-3">
+                    <input type="tel" class="form-control" name="phone" placeholder="Phone" required 
+                           style="border: 1px solid #ddd; border-radius: 4px; padding: 12px;">
+                  </div>
+                </div>
+                
+                <!-- Второй столбец -->
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <select class="form-control" name="people" required 
+                            style="border: 1px solid #ddd; border-radius: 4px; padding: 12px;">
+                      <option value="" disabled selected>Number of People</option>
+                      <option value="1">1 Person</option>
+                      <option value="2">2 People</option>
+                      <option value="3">3 People</option>
+                      <option value="4">4 People</option>
+                      <option value="5+">5+ People</option>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group mb-3">
+                    <input type="text" class="form-control" name="date" placeholder="Date" onfocus="(this.type='date')" required 
+                           style="border: 1px solid #ddd; border-radius: 4px; padding: 12px;">
+                  </div>
+                  
+                  <div class="form-group mb-4">
+                    <input type="text" class="form-control" name="time" placeholder="Time" onfocus="(this.type='time')" required 
+                           style="border: 1px solid #ddd; border-radius: 4px; padding: 12px;">
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Кнопка BOOK NOW по центру -->
+              <div class="text-center">
+                <button type="submit" class="btn btn-warning px-5 py-3" 
+                        style="letter-spacing: 2px; font-weight: bold; border-radius: 4px; background-color: #FFD700; border-color: #FFD700; margin: 0 auto;">BOOK NOW</button>
+              </div>
+            </form>
+            
+            <!-- Часы работы -->
+            <div class="text-center mt-4 pt-3" style="border-top: 1px solid #eee; color: #666; font-size: 0.9rem;">
+              <p class="mb-1">Mon - Fri 8PM - 11PM, Sat - Sun 8PM - 3AM</p>
+              <p>Phone +7 800 555 35 35</p>
+            </div>
+          </div>
+          
+          <!-- Картинка справа (смещена правее) -->
+          <div class="booking-image ml-md-4 mt-4 mt-md-0" style="flex: 1; min-height: 300px; background-image: url('img/d84f386f33aee737ae4b1e078f2e41dcbaa971dc.jpg'); background-size: cover; background-position: center; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-left: 2rem;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 specialities-section" style="background-image: url('img/ee7dd096bd2cc411643a2822521d6e716aa42a6c.jpg'); background-size: cover; background-position: center; position: relative;">
+  <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6);"></div>
+  <div class="container" style="position: relative; z-index: 1;">
+    <h2 class="section-title text-center mb-5" style="color: #FFD700;">SPECIALITIES</h2>
+    
+    <div class="row align-items-center">
+      <!-- Блок с изображением блюда -->
+      <div class="col-md-6 text-center mb-4 mb-md-0">
+        <img src="img/1cf2afa4158a6f786fceddda8c0e295d4f10419e.png" 
+             alt="Chocolate Pancakes" 
+             class="img-fluid dish-img" 
+             style="max-width: 100%; height: auto; max-height: 500px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
+      </div>
+      
+      <!-- Блок с описанием -->
+      <div class="col-md-6">
+        <div class="special-content p-3 p-lg-4" style="color: #FFD700;">
+          <h3 class="mb-4" style="font-weight: bold;">Chef's Sweet Masterpiece</h3>
+          <p class="lead" style="font-size: 1.1rem;">Decadent breakfast delight that will satisfy your sweet cravings</p>
+          
+          <div class="dish-details mt-4">
+            <h4 style="border-bottom: 1px solid #FFD700; padding-bottom: 8px; display: inline-block;">Chocolate Pancakes</h4>
+            <p class="mt-3">Fluffy buttermilk pancakes with rich cocoa batter, topped with molten chocolate sauce, fresh berries and dusted with powdered sugar</p>
+            
+            <ul class="list-unstyled mt-4">
+              <li class="mb-2">✔ Made with premium Belgian chocolate</li>
+              <li class="mb-2">✔ Served with vanilla bean whipped cream</li>
+              <li class="mb-2">✔ Optional maple syrup or caramel drizzle</li>
+            </ul>
+            
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="menu" class="py-5" style="background-color: #f8f9fa;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title" style="font-size: 2.5rem; letter-spacing: 2px; color: #333;">DELICIOUS MENU</h2>
+      <p class="lead" style="max-width: 600px; margin: 0 auto; color: #666;">
+        Discover our exquisite selection of dishes prepared with the finest ingredients by our master chefs.
+      </p>
+      
+      <!-- Category Buttons -->
+      <div class="d-flex justify-content-center flex-wrap mt-4 mb-5" style="gap: 0;">
+        <button class="category-btn active" data-category="pizza">PIZZA</button>
+        <div class="vertical-divider"></div>
+        <button class="category-btn" data-category="pasta">PASTA</button>
+        <div class="vertical-divider"></div>
+        <button class="category-btn" data-category="soupe">SOUPE</button>
+        <div class="vertical-divider"></div>
+        <button class="category-btn" data-category="desert">DESERT</button>
+        <div class="vertical-divider"></div>
+        <button class="category-btn" data-category="drinks">DRINKS</button>
+        <div class="vertical-divider"></div>
+        <button class="category-btn" data-category="beer">BEER</button>
+        <div class="vertical-divider"></div>
+        <button class="category-btn" data-category="wine">WINE</button>
+      </div>
+    </div>
+
+    <div class="menu-items">
+      <!-- Pizza Category -->
+      <div class="menu-category" id="pizza-category">
+        <div class="row mb-4">
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>MARGHERITA PIZZA</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Classic tomato sauce, mozzarella and basil</span>
+                <span class="price">12.99 USD</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>PEPPERONI PIZZA</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Tomato sauce, mozzarella and spicy pepperoni</span>
+                <span class="price">14.99 USD</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>TRUFFLE PIZZA</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Mushrooms, truffle oil and gourmet cheese</span>
+                <span class="price">18.99 USD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Pasta Category -->
+      <div class="menu-category" id="pasta-category" style="display: none;">
+        <div class="row mb-4">
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>CARBONARA PASTA</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Spaghetti with eggs, cheese, pancetta and black pepper</span>
+                <span class="price">15.50 USD</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>BOLOGNESE PASTA</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Tagliatelle with rich meat sauce and parmesan</span>
+                <span class="price">16.75 USD</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>SEAFOOD PASTA</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Linguine with mixed seafood in white wine sauce</span>
+                <span class="price">19.99 USD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Soupe Category -->
+      <div class="menu-category" id="soupe-category" style="display: none;">
+        <div class="row mb-4">
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>TOMATO SOUPE</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Creamy tomato soup with fresh basil</span>
+                <span class="price">8.50 USD</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>FRENCH ONION SOUPE</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Caramelized onions in rich beef broth with cheese</span>
+                <span class="price">10.25 USD</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>MUSHROOM SOUPE</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Creamy wild mushroom soup with truffle oil</span>
+                <span class="price">11.75 USD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Desert Category -->
+      <div class="menu-category" id="desert-category" style="display: none;">
+        <div class="row mb-4">
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>CHOCOLATE SOUFFLÉ</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Warm chocolate dessert with vanilla ice cream</span>
+                <span class="price">9.99 USD</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>CRÈME BRÛLÉE</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Classic vanilla custard with caramelized sugar</span>
+                <span class="price">8.50 USD</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>TI RAMI SU</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Layers of coffee-soaked ladyfingers and mascarpone</span>
+                <span class="price">10.25 USD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Drinks Category -->
+      <div class="menu-category" id="drinks-category" style="display: none;">
+        <div class="row mb-4">
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>FRESH JUICES</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Orange, apple, pineapple or carrot juice</span>
+                <span class="price">5.50 USD</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>LEMONADE</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Homemade lemonade with mint</span>
+                <span class="price">6.00 USD</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>ICED TEA</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Fresh brewed iced tea with lemon</span>
+                <span class="price">4.75 USD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Beer Category -->
+      <div class="menu-category" id="beer-category" style="display: none;">
+        <div class="row mb-4">
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>CRAFT LAGER</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Local craft lager 0.5L</span>
+                <span class="price">7.50 USD</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>IPA BEER</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>India Pale Ale 0.5L</span>
+                <span class="price">8.25 USD</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>WHEAT BEER</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>German-style wheat beer 0.5L</span>
+                <span class="price">8.75 USD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Wine Category -->
+      <div class="menu-category" id="wine-category" style="display: none;">
+        <div class="row mb-4">
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>HOUSE RED</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Glass of our signature red wine</span>
+                <span class="price">9.50 USD</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>SAUVIGNON BLANC</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>Fresh New Zealand white wine</span>
+                <span class="price">11.00 USD</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+            <div class="menu-item p-3">
+              <h4>CHAMPAGNE</h4>
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span>French brut champagne glass</span>
+                <span class="price">15.00 USD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .category-btn {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+  
+  .category-btn:hover, .category-btn.active {
+    color: #000;
+  }
+  
+  .category-btn.active {
+    font-weight: 800;
+  }
+  
+  .vertical-divider {
+    width: 1px;
+    background-color: #ddd;
+    margin: 0 5px;
+  }
+  
+  .menu-item {
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    height: 100%;
+    transition: transform 0.3s ease;
+  }
+  
+  .menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  .menu-item h4 {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    color: #333;
+  }
+  
+  .price {
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+    margin-left: 10px;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.category-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      document.querySelectorAll('.menu-category').forEach(cat => cat.style.display = 'none');
+      document.getElementById(this.dataset.category + '-category').style.display = 'block';
+    });
+  });
+</script>
+
+<section id="events" class="py-5 position-relative" style="background-image: url('img/ee7dd096bd2cc411643a2822521d6e716aa42a6c.jpg'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 600px;">
+  <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);"></div>
+  
+  <div class="container position-relative" style="z-index: 1;">
+    <div class="text-center">
+      <h2 class="section-title mb-4" style="font-size: 3rem; letter-spacing: 3px; color: #fff; text-transform: uppercase; padding-top: 80px;">Private Events</h2>
+      
+      <div class="row align-items-center justify-content-center mt-5">
+        <!-- Левая фотография -->
+        <div class="col-md-4 text-center mb-5 mb-md-0">
+          <div class="event-photo" style="overflow: hidden; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <img src="img/a2c42a1ce93ee87472176da98027b1e86d76098e.jpg" alt="Wedding Event" class="img-fluid" style="transition: transform 0.5s ease; width: 100%;">
+          </div>
+          <h3 class="mt-4" style="color: #FFD700; font-weight: 600; letter-spacing: 1px;">WEDDINGS</h3>
+        </div>
+        
+        <!-- Правая фотография -->
+        <div class="col-md-4 text-center">
+          <div class="event-photo" style="overflow: hidden; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <img src="img/bd99f93de240e8a7ea009143d2d7fee2a9fe3add.jpg" alt="Private Party" class="img-fluid" style="transition: transform 0.5s ease; width: 100%;">
+          </div>
+          <h3 class="mt-4" style="color: #FFD700; font-weight: 600; letter-spacing: 1px;">PRIVATE PARTY</h3>
+        </div>
+      </div>
+      
+      <p class="mt-5 mx-auto" style="color: #fff; max-width: 600px; font-size: 1.1rem;">
+        We host unforgettable weddings, corporate dinners, and private parties in our exclusive venue.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .event-photo:hover img {
+    transform: scale(1.05);
+  }
+  
+  .section-title {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .section-title:after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: #FFD700;
+  }
+</style>
+
+
+
+
+
+<section id="contact" class="py-5" style="background-color: #f8f9fa;">
+  <div class="container">
+    <!-- 4 маленькие фотографии -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-6 col-md-3 mb-3 mb-md-0">
+        <div class="contact-thumbnail" style="overflow: hidden; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); height: 180px;">
+          <img src="img/0f9a4c42e88c5903c65860f9ce0076e1052a31f0.jpg" 
+               alt="Restaurant Interior" 
+               class="img-fluid w-100 h-100" 
+               style="transition: transform 0.3s ease; object-fit: cover;">
+        </div>
+      </div>
+      <div class="col-6 col-md-3 mb-3 mb-md-0">
+        <div class="contact-thumbnail" style="overflow: hidden; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); height: 180px;">
+          <img src="img/1cf2afa4158a6f786fceddda8c0e295d4f10419e.png" 
+               alt="Our Team" 
+               class="img-fluid w-100 h-100" 
+               style="transition: transform 0.3s ease; object-fit: cover;">
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="contact-thumbnail" style="overflow: hidden; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); height: 180px;">
+          <img src="img/8949c6ccca0565643ae10a680380561b0eb6f71a.jpg" 
+               alt="Dishes" 
+               class="img-fluid w-100 h-100" 
+               style="transition: transform 0.3s ease; object-fit: cover;">
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="contact-thumbnail" style="overflow: hidden; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); height: 180px;">
+          <img src="img/bd99f93de240e8a7ea009143d2d7fee2a9fe3add.jpg" 
+               alt="Event" 
+               class="img-fluid w-100 h-100" 
+               style="transition: transform 0.3s ease; object-fit: cover;">
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="contact-card p-4" style="background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+          <h2 class="text-center mb-4" style="font-size: 2rem; letter-spacing: 1px; color: #333;">Contact Us</h2>
+          
+          <!-- Форма с id="contactForm" для обработки через jQuery -->
+          <form id="contactForm" method="post" action="php/process_contact.php">
+            <div class="form-group mb-3">
+              <input type="text" class="form-control" id="contactName" name="name" placeholder="Your Name" required 
+                     style="border: 1px solid #ddd; border-radius: 4px; padding: 12px;">
+            </div>
+            
+            <div class="form-group mb-3">
+              <input type="email" class="form-control" id="contactEmail" name="email" placeholder="Email" required 
+                     style="border: 1px solid #ddd; border-radius: 4px; padding: 12px;">
+            </div>
+            
+            <div class="form-group mb-4">
+              <textarea class="form-control" id="contactMessage" name="message" placeholder="Message" rows="4" required 
+                        style="border: 1px solid #ddd; border-radius: 4px; padding: 12px;"></textarea>
+            </div>
+            
+            <div class="text-center">
+              <button type="submit" class="btn btn-warning px-5 py-3" id="contactSubmit"
+                      style="letter-spacing: 1px; font-weight: bold; border-radius: 4px; background-color: #FFD700; border-color: #FFD700; width: 100%;">
+                SEND MESSAGE
+              </button>
+            </div>
+          </form>
+          
+          <!-- Блок для сообщений (успех/ошибка) -->
+          <div id="contactMessageBox" class="mt-3 text-center" style="display: none;"></div>
+          
+          <!-- Контактная информация -->
+          <div class="text-center mt-4 pt-3" style="border-top: 1px solid #eee; color: #666; font-size: 0.9rem;">
+            <p class="mb-1">123 Restaurant Street, Food City</p>
+            <p>Phone: +7 800 555 35 35 | Email: info@hunger-restaurant.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-thumbnail:hover img {
+    transform: scale(1.1);
+  }
+  
+  .section-title {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .section-title:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: #FFD700;
+  }
+</style>
+
+<style>
+  .contact-thumbnail:hover img {
+    transform: scale(1.1);
+  }
+  
+  .section-title {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .section-title:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: #FFD700;
+  }
+</style>
+
+  <section id="map" class="py-5">
+    <div class="container">
+      <h2 class="section-title">Find Us</h2>
+      <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Aexamplekey&amp;source=constructor"
+        width="100%" height="300" frameborder="0"></iframe>
+    </div>
+  </section>
+</main>
+
+<!-- Модальное окно с новой структурой -->
+<div id="authModal" class="modal-overlay"></div>
+<div id="authModalContent" class="modal-container" style="display:none;">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="m-0">Login</h5>
+    <button type="button" class="btn-close" onclick="hideAuthModal()">×</button>
+  </div>
+  <form id="loginForm" method="post" action="php/process_login.php">
+    <input type="email" name="email" class="form-control mb-2" placeholder="Email" required>
+    <input type="password" name="password" class="form-control mb-2" placeholder="Password" required>
+    <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
+  </form>
+  <p class="text-muted text-center mb-3">Or Register Below</p>
+  <form id="registerForm" method="post" action="php/process_register.php">
+    <input type="text" name="name" class="form-control mb-2" placeholder="Full Name" required>
+    <input type="email" name="email" class="form-control mb-2" placeholder="Email" required>
+    <input type="password" name="password" class="form-control mb-2" placeholder="Password" required>
+    <input type="password" name="confirmPassword" class="form-control mb-2" placeholder="Confirm Password" required>
+    <button type="submit" class="btn btn-success w-100">Register</button>
+  </form>
+<div id="authMessage" class="mt-3 text-center" style="display: none;"></div>
+</div>
+
+<footer class="text-center py-4 bg-dark text-white">
+  <div class="container">
+    <p class="m-0">&copy; 2023 Hunger Restaurant. All rights reserved.</p>
+    <div class="mt-2">
+      <a href="https://facebook.com" target="_blank" class="text-white mx-2">Facebook</a>
+      <a href="https://instagram.com" target="_blank" class="text-white mx-2">Instagram</a>
+      <a href="https://t.me" target="_blank" class="text-white mx-2">Telegram</a>
+    </div>
+  </div>
+</footer>
+
+<!--<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
+<script>
+$(document).ready(function(){
+  $('.slider').slick({
+    autoplay: true,
+    dots: true
+  });
+
+  $(window).on('scroll', function() {
+    if ($(this).scrollTop() > 50) {
+      $('.header').addClass('scrolled');
+    } else {
+      $('.header').removeClass('scrolled');
+    }
+  });
+});
+
+// Функции для работы с модальным окном
+function showAuthModal() {
+  document.getElementById('authModal').style.display = 'block';
+  document.getElementById('authModalContent').style.display = 'block';
+}
+
+function hideAuthModal() {
+  document.getElementById('authModal').style.display = 'none';
+  document.getElementById('authModalContent').style.display = 'none';
+}
+
+// Закрытие при клике на оверлей
+document.getElementById('authModal').addEventListener('click', hideAuthModal);
+
+// Предотвращаем закрытие при клике на содержимое
+document.getElementById('authModalContent').addEventListener('click', function(e) {
+  e.stopPropagation();
+});
+
+// Обработка форм
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  alert('Login submitted!');
+  hideAuthModal();
+});
+
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const password = this.querySelector('input[type="password"]').value;
+  const confirmPassword = this.querySelectorAll('input[type="password"]')[1].value;
+  
+  if (password !== confirmPassword) {
+    alert('Passwords do not match!');
+    return;
+  }
+  
+  alert('Registration successful!');
+  hideAuthModal();
+});
+</script>
+</body>
+</html>
